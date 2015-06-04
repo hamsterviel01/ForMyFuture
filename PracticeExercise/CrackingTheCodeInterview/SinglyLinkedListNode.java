@@ -1,4 +1,4 @@
-public class SinglyLinkedListNode implements LinkedListNode {
+public class SinglyLinkedListNode {
 	SinglyLinkedListNode next = null;
 	int data;
 
