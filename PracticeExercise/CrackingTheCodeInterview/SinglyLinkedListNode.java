@@ -1,10 +1,8 @@
-public class SinglyLinkedListNode {
-	SinglyLinkedListNode next = null;
-	int data;
-	int key;
+public class SinglyLinkedListNode extends LinkedListNode{
+	private SinglyLinkedListNode next = null;
 
 	public SinglyLinkedListNode(int data){
-		this.data = data;
+		setData(data);
 	}
 
 	public void appendToTail(int data){
@@ -14,17 +12,20 @@ public class SinglyLinkedListNode {
 			node = node.next;	
 		}
 		node.next = end;
+		end.setKey(node.getKey()+1);
 	}
 
-	public static SinglyLinkedListNode deleteNode(SinglyLinkedListNode head, int key){
-		SinglyLinkedListNode node = head;
+	
+	
+	public LinkedListNode deleteCurrentNode(LinkedListNode head){
+		SinglyLinkedListNode node = (SinglyLinkedListNode)head;
 		//if remove head??
-		if (head.key == key){
-			return head.next;
+		if (node.getKey() == getKey()){
+			return (LinkedListNode)node.next;
 		}
 		//if remove non-head node
 		while (node.next != null){
-			if (node.next.key == key){
+			if (node.next.getKey() == getKey()){
 				node.next = node.next.next;
 				return head;
 			}
@@ -33,4 +34,11 @@ public class SinglyLinkedListNode {
 		return head;
 	}
 
+	public SinglyLinkedListNode getNext(){
+		return next;
+	}
+
+	public void setNext(SinglyLinkedListNode next){
+		this.next = next;
+	}
 }
