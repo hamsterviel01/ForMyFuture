@@ -1,6 +1,7 @@
 public class SinglyLinkedListNode {
 	SinglyLinkedListNode next = null;
 	int data;
+	int key;
 
 	public SinglyLinkedListNode(int data){
 		this.data = data;
@@ -15,15 +16,15 @@ public class SinglyLinkedListNode {
 		node.next = end;
 	}
 
-	public static SinglyLinkedListNode deleteNode(SinglyLinkedListNode head, int data){
+	public static SinglyLinkedListNode deleteNode(SinglyLinkedListNode head, int key){
 		SinglyLinkedListNode node = head;
 		//if remove head??
-		if (head.data == data){
+		if (head.key == key){
 			return head.next;
 		}
 		//if remove non-head node
 		while (node.next != null){
-			if (node.next.data == data){
+			if (node.next.key == key){
 				node.next = node.next.next;
 				return head;
 			}
