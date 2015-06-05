@@ -38,7 +38,7 @@ public class SinglyLinkedListNode extends LinkedListNode{
 		return next;
 	}
 
-	public void setNext(SinglyLinkedListNode next){
-		this.next = next;
+	public void setNext(LinkedListNode next){
+		this.next = (SinglyLinkedListNode)next;
 	}
 }

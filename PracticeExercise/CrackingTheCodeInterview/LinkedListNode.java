@@ -2,8 +2,10 @@ public abstract class LinkedListNode {
 	private int data;
 	private int key;
 	private LinkedListNode next;
-	public abstract void appendToTail(int data);
-	public abstract LinkedListNode deleteCurrentNode(LinkedListNode head);
+	abstract void appendToTail(int data);
+	abstract LinkedListNode deleteCurrentNode(LinkedListNode head);
+	abstract public LinkedListNode getNext();
+	abstract public void setNext(LinkedListNode next);
 	public int getData(){
 		return data;
 	}
@@ -15,11 +17,5 @@ public abstract class LinkedListNode {
 	}
 	public void setKey(int key){
 		this.key = key;
-	}
-	public LinkedListNode getNext(){
-		return next;
-	}
-	public void setNext(LinkedListNode next){
-		this.next = next;
 	}
 }

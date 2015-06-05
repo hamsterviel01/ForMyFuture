@@ -45,8 +45,8 @@ public class DoubleLinkedListNode extends LinkedListNode {
 		return next;
 	}
 
-	public void setNext(DoubleLinkedListNode next){
-		this.next = next;
+	public void setNext(LinkedListNode next){
+		this.next = (DoubleLinkedListNode)next;
 	}
 	public DoubleLinkedListNode getPrev(){
 		return prev;
