@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class SinglyLinkedListNode extends LinkedListNode{
 	private SinglyLinkedListNode next = null;
 
@@ -14,8 +16,6 @@ public class SinglyLinkedListNode extends LinkedListNode{
 		node.next = end;
 		end.setKey(node.getKey()+1);
 	}
-
-	
 	
 	public LinkedListNode deleteCurrentNode(LinkedListNode head){
 		SinglyLinkedListNode node = (SinglyLinkedListNode)head;
@@ -40,5 +40,22 @@ public class SinglyLinkedListNode extends LinkedListNode{
 
 	public void setNext(LinkedListNode next){
 		this.next = (SinglyLinkedListNode)next;
+	}
+
+	public static SinglyLinkedListNode createRandomLinkedList(int length, int randomSize){
+		if (length==0){
+			return null;
+		}
+		Random random = new Random();
+		SinglyLinkedListNode head = new SinglyLinkedListNode(random.nextInt(randomSize));
+		SinglyLinkedListNode pointer = head;
+		//default value of int is 0 --> key of head is already 0
+		while (pointer.getKey() < length-1){
+			pointer.appendToTail(random.nextInt(randomSize));
+			System.out.print(pointer.getData() + " --> ");
+			pointer = pointer.getNext();
+		} 
+		System.out.println(pointer.getData() + "\n");
+		return head;
 	}
 }

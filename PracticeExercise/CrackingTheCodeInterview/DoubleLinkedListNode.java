@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class DoubleLinkedListNode extends LinkedListNode {
 	private DoubleLinkedListNode prev = null;
 	private DoubleLinkedListNode next = null;
@@ -38,6 +40,24 @@ public class DoubleLinkedListNode extends LinkedListNode {
 			}
 			node = node.next;
 		}
+		return head;
+	}
+
+
+	public static DoubleLinkedListNode createRandomLinkedList(int length, int randomSize){
+		if (length==0){
+			return null;
+		}
+		Random random = new Random();
+		DoubleLinkedListNode head = new DoubleLinkedListNode(random.nextInt(randomSize));
+		DoubleLinkedListNode pointer = head;
+		//default value of int is 0 --> key of head is already 0
+		while (pointer.getKey() < length-1){
+			pointer.appendToTail(random.nextInt(randomSize));
+			System.out.print(pointer.getData() + " --> ");
+			pointer = pointer.getNext();
+		} 
+		System.out.println(pointer.getData() + "\n");
 		return head;
 	}
 
