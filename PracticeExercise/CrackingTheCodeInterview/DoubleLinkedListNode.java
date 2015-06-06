@@ -43,7 +43,6 @@ public class DoubleLinkedListNode extends LinkedListNode {
 		return head;
 	}
 
-
 	public static DoubleLinkedListNode createRandomLinkedList(int length, int randomSize){
 		if (length==0){
 			return null;

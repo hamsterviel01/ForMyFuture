@@ -6,18 +6,31 @@ public abstract class LinkedListNode {
 	private LinkedListNode next;
 	abstract void appendToTail(int data);
 	abstract LinkedListNode deleteCurrentNode(LinkedListNode head);
-	abstract LinkedListNode getNext();
 	abstract void setNext(LinkedListNode next);
-	public int getData(){
+	LinkedListNode getNext(){
+		return next;
+	}
+	int getData(){
 		return data;
 	}
-	public void setData(int data){
+	void setData(int data){
 		this.data = data;
 	}
-	public int getKey(){
+	int getKey(){
 		return key;
 	}
-	public void setKey(int key){
+	void setKey(int key){
 		this.key = key;
+	}
+	void printLinkedList(){
+		LinkedListNode temp = this;
+		while (temp!=null){
+			if (temp.getNext()!=null){
+				System.out.print(temp.getData() + " --> ");
+			} else {
+				System.out.print(temp.getData() + "\n");
+			}
+			temp = temp.getNext();
+		}
 	}
 }

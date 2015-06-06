@@ -55,18 +55,6 @@ public class LinkedLists21 {
 		}
 	}
 
-	public static void printLinkedList(LinkedListNode head){
-		LinkedListNode temp2 = head;
-		while (temp2!=null){
-			if (temp2.getNext()!=null){
-				System.out.print(temp2.getData() + " --> ");
-			} else {
-				System.out.print(temp2.getData() + "\n");
-			}
-			temp2 = temp2.getNext();
-		}
-	}
-
 	public static void main(String[] args){
 		//how to create a linked list with 6 nodes from SinglyLinkedListNode class??
 		Random random = new Random();
@@ -79,7 +67,7 @@ public class LinkedLists21 {
 		}
 		System.out.print(temp1.getData() + "\n");
 		removeDuplicatedWithoutBuffer(head);
-		printLinkedList(head);
+		head.printLinkedList();
 
 		DoubleLinkedListNode head2 = new DoubleLinkedListNode(random.nextInt(6));
 		DoubleLinkedListNode temp2 = head2;
@@ -91,6 +79,6 @@ public class LinkedLists21 {
 		System.out.print(temp2.getData() + "\n");
 
 		removeDuplicatedWithBuffer(head2);
-		printLinkedList(head2);
+		head2.printLinkedList();
 	}
 }
