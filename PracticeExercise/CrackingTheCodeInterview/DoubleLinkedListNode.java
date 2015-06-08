@@ -47,6 +47,7 @@ public class DoubleLinkedListNode extends LinkedListNode {
 		return head;
 	}
 
+<<<<<<< HEAD
 	public void insertAfter(LinkedListNode node){
 		DoubleLinkedListNode newNode = (DoubleLinkedListNode)node;
 		newNode.setNext(this.next);
@@ -56,6 +57,8 @@ public class DoubleLinkedListNode extends LinkedListNode {
 	}
 
 
+=======
+>>>>>>> df636323fdb37852dba1b85e0c95ffb89f05f62b
 	public static DoubleLinkedListNode createRandomLinkedList(int length, int randomSize){
 		if (length==0){
 			return null;
