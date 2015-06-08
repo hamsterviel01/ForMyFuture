@@ -3,6 +3,10 @@ import java.util.*;
 public class SinglyLinkedListNode extends LinkedListNode{
 	private SinglyLinkedListNode next = null;
 
+	public SinglyLinkedListNode(){
+
+	}
+
 	public SinglyLinkedListNode(int data){
 		setData(data);
 	}
@@ -32,6 +36,11 @@ public class SinglyLinkedListNode extends LinkedListNode{
 			node = node.next;
 		}
 		return head;
+	}
+
+	public void insertAfter(LinkedListNode node){
+		node.setNext(this.next);
+		this.next = (SinglyLinkedListNode)node;
 	}
 
 	public SinglyLinkedListNode getNext(){

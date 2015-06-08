@@ -4,6 +4,10 @@ public class DoubleLinkedListNode extends LinkedListNode {
 	private DoubleLinkedListNode prev = null;
 	private DoubleLinkedListNode next = null;
 
+	public DoubleLinkedListNode(){
+
+	}
+
 	public DoubleLinkedListNode(int data){
 		setData(data);
 	}
@@ -41,6 +45,14 @@ public class DoubleLinkedListNode extends LinkedListNode {
 			node = node.next;
 		}
 		return head;
+	}
+
+	public void insertAfter(LinkedListNode node){
+		DoubleLinkedListNode newNode = (DoubleLinkedListNode)node;
+		newNode.setNext(this.next);
+		newNode.setPrev(this);
+		this.next.setPrev(newNode); 
+		this.next = newNode;
 	}
 
 
