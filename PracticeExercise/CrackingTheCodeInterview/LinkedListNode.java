@@ -4,13 +4,14 @@ public abstract class LinkedListNode {
 	private int data;
 	private int key;
 	private LinkedListNode next;
+
+	LinkedListNode(int data){
+		this.data = data;
+	}
+	
 	abstract void appendToTail(int data);
 	abstract LinkedListNode deleteCurrentNode(LinkedListNode head);
-<<<<<<< HEAD
 	abstract void insertAfter(LinkedListNode node);
-	abstract LinkedListNode getNext();
-=======
->>>>>>> df636323fdb37852dba1b85e0c95ffb89f05f62b
 	abstract void setNext(LinkedListNode next);
 	LinkedListNode getNext(){
 		return next;
