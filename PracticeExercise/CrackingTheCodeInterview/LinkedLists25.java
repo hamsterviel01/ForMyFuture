@@ -38,23 +38,15 @@ public class LinkedLists25 {
 	// 	return headSum;
 	// }
 
-	public static LinkedListNode convertSumToLinkedList(int sum){
+	public static void convertSumToLinkedList(LinkedListNode head, int sum){
 		//Convert sum value to LinkedList;
-		try {
-			Class<? extends LinkedListNode> headSumClassReference;
-			LinkedListNode headSum = headSumClassReference.newInstance();
+		head.setData(sum%10);
+		sum = sum/10;
+		LinkedListNode pointerSum = head;
+		while(sum>0){
+			pointerSum.appendToTail(sum%10);
 			sum = sum/10;
-			LinkedListNode pointerSum = headSum;
-			while(sum>0){
-				pointerSum.appendToTail(sum%10);
-				sum = sum/10;
-				pointerSum = pointerSum.getNext();
-			}
-			return headSum;
-		} catch (InstantiationException e){
-			throw new RuntimeException(e);
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
+			pointerSum = pointerSum.getNext();
 		}
 	}
 
@@ -69,7 +61,8 @@ public class LinkedLists25 {
 		LinkedListNode head1 = SinglyLinkedListNode.createRandomLinkedList(3, 10);
 		LinkedListNode head2 = SinglyLinkedListNode.createRandomLinkedList(7, 10);
 
-		LinkedListNode headSum = convertSumToLinkedList(sumOfLinkedList(head1, head2));
+		LinkedListNode headSum = new SinglyLinkedListNode();
+		convertSumToLinkedList(headSum, sumOfLinkedList(head1, head2));
 		headSum.printLinkedList();
 	}
 }
