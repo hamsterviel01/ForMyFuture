@@ -5,6 +5,9 @@ public abstract class LinkedListNode {
 	private int key;
 	private LinkedListNode next;
 
+	LinkedListNode(){
+	
+	}
 	LinkedListNode(int data){
 		this.data = data;
 	}

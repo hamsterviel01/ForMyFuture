@@ -25,38 +25,38 @@ public class LinkedLists25 {
 		return sum;
 	}
 
-	public static SinglyLinkedListNode convertSumToLinkedList(int sum){
-		//Convert sum value to LinkedList
-		SinglyLinkedListNode headSum = new SinglyLinkedListNode(sum%10);
-		sum = sum/10;
-		SinglyLinkedListNode pointerSum = headSum;
-		while(sum>0){
-			pointerSum.appendToTail(sum%10);
-			sum = sum/10;
-			pointerSum = pointerSum.getNext();
-		}
-		return headSum;
-	}
-
-	// public static LinkedListNode convertSumToLinkedList(int sum){
-	// 	//Convert sum value to LinkedList;
-	// 	try {
-	// 		Class<? extends LinkedListNode> headSumClassReference;
-	// 		LinkedListNode headSum = headSumClassReference.newInstance();
+	// public static SinglyLinkedListNode convertSumToLinkedList(int sum){
+	// 	//Convert sum value to LinkedList
+	// 	SinglyLinkedListNode headSum = new SinglyLinkedListNode(sum%10);
+	// 	sum = sum/10;
+	// 	SinglyLinkedListNode pointerSum = headSum;
+	// 	while(sum>0){
+	// 		pointerSum.appendToTail(sum%10);
 	// 		sum = sum/10;
-	// 		LinkedListNode pointerSum = headSum;
-	// 		while(sum>0){
-	// 			pointerSum.appendToTail(sum%10);
-	// 			sum = sum/10;
-	// 			pointerSum = pointerSum.getNext();
-	// 		}
-	// 		return headSum;
-	// 	} catch (InstantiationException e){
-	// 		throw new RuntimeException(e);
-	// 	} catch (IllegalAccessException e) {
-	// 		throw new RuntimeException(e);
+	// 		pointerSum = pointerSum.getNext();
 	// 	}
+	// 	return headSum;
 	// }
+
+	public static LinkedListNode convertSumToLinkedList(int sum){
+		//Convert sum value to LinkedList;
+		try {
+			Class<? extends LinkedListNode> headSumClassReference;
+			LinkedListNode headSum = headSumClassReference.newInstance();
+			sum = sum/10;
+			LinkedListNode pointerSum = headSum;
+			while(sum>0){
+				pointerSum.appendToTail(sum%10);
+				sum = sum/10;
+				pointerSum = pointerSum.getNext();
+			}
+			return headSum;
+		} catch (InstantiationException e){
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	//Implement solution in textbook, which was way better
 	public static LinkedListNode addListsA(LinkedListNode pointer1, LinkedListNode pointer2, int carry){

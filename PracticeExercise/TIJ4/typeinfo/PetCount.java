@@ -14,8 +14,7 @@ public class PetCount {
         put(type, quantity + 1);
     }
   }	
-  public static void
-  countPets(PetCreator creator) {
+  public static void countPets(PetCreator creator) {
     PetCounter counter= new PetCounter();
     for(Pet pet : creator.createArray(20)) {
       // List each individual pet:
