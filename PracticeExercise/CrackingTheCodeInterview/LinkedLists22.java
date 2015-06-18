@@ -30,14 +30,12 @@ public class LinkedLists22{
 			pointer2 = pointer2.getNext();
 			pointer1 = pointer1.getNext();
 		}
-
 		return pointer1;
 	}
 
 	public static void main(String[] args){
 		SinglyLinkedListNode head = SinglyLinkedListNode.createRandomLinkedList(9, 100);
 		DoubleLinkedListNode head1 = DoubleLinkedListNode.createRandomLinkedList(1, 100);
-
 		Scanner scan = new Scanner(System.in);
 		int n = scan.nextInt();
 		System.out.println(returnNthToLastElement(head, n).getData());
