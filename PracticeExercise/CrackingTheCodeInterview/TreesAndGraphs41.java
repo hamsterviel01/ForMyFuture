@@ -2,8 +2,8 @@ import java.util.*;
 
 /**
 Lesson learned:
+- Produce cases and watch the pattern before devise algorigthm
 - Analyze the problem more carefully
-- Be smarter, I guess?
 */
 public class TreesAndGraphs41 {
 	public static boolean isBalance(BinaryTreeNode root){
@@ -47,5 +47,6 @@ public class TreesAndGraphs41 {
 		root.getRightChild().setRightChild(new BinaryTreeNode(2));
 
 		System.out.println(isBalance(root));
+		root.printBinaryTree();
 	}
 }
