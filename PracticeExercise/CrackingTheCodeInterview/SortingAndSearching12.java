@@ -1,6 +1,47 @@
 import java.util.*;
 
 public class SortingAndSearching12 {
+	//Solution in Textbook
+	public static String[] sortArrayString(String[] stringArray){
+		Hashtable<String, LinkedList<String>> table = new Hashtable<String, LinkedList<String>>();
+		String[] results = new String[stringArray.length];
+
+		for (String str: stringArray){
+			String sortedStr = sortString(str);
+			if (table.contains(sortedStr)){
+				table.getValue(sortedStr).add(str);
+			} else {
+				table.add(sortedStr, new LinkedList<String>());
+				table.getValue(sortedStr).add(str);
+			}
+		}
+
+		int i = 0;
+		for (String key: table.keySet()){
+			LinkedList<String> list = table.getKey(key);
+			for (String str: list){
+				results[i] = str;
+				i++;
+			}
+		}
+	}
+
+	public static String sortString(String str){
+		return null;
+	}
+
+	public static void main(String[] args){
+		String[] stringArray = new String[]{"asdccab", "adfd", "dffs", "sdddss", "sdacbac", "sdsdsd", "cabdsac", "assdf"};
+		String[] newStringArray = sortArrayString(stringArray);
+		for (int i=0; i<newStringArray.length; i++){
+			System.out.print(newStringArray[i] + "; ");
+		}
+		System.out.println();
+	}
+}
+
+/**
+//My stupid solution
 	//Use LinkedHashMap to check if current string was already contained inside sorted list 
 	public static String[] sortArrayString(String[] stringArray){
 		String[] newStringArray = new String[stringArray.length];
@@ -15,7 +56,6 @@ public class SortingAndSearching12 {
 				for (int j=0; j<stringArray.length; j++){
 					if (stringArray[j] != null && j != i){
 						if (isAnagram(temp, stringArray[j])){
-							//we need to know if stringArray[i] has 
 							newStringArray[newIndex] = stringArray[j];
 							newIndex++;
 							stringArray[j] = null;
@@ -44,28 +84,4 @@ public class SortingAndSearching12 {
 		}
 		return true;
 	}
-
-	//Runtime - nlog n
-	public static boolean isAnagramSort(String str1, String str2){
-		if (str1.length() != str2.length()){
-			return false;
-		}
-		char[] str1Array = mergeSort(str1.toCharArray());
-		char[] str2Array = mergeSort(str2.toCharArray());
-
-		return Arrays.equals(str1Array, str2Array);
-	}
-
-	public static char[] mergeSort(char[] str){
-		return null;
-	}
-
-	public static void main(String[] args){
-		String[] stringArray = new String[]{"asdccab", "adfd", "dffs", "sdddss", "sdacbac", "sdsdsd", "cabdsac", "assdf"};
-		String[] newStringArray = sortArrayString(stringArray);
-		for (int i=0; i<newStringArray.length; i++){
-			System.out.print(newStringArray[i] + "; ");
-		}
-		System.out.println();
-	}
-}
+*/
