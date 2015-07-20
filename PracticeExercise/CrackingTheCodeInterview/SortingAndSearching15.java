@@ -1,4 +1,5 @@
 public class SortingAndSearching15 {
+	//This algo don't accept "value" as empty string
 	public static int findString(String[] strArray, String value, int start, int end){
 		int mid = (start+end)/2;
 		int beforeMid = mid - 1;
