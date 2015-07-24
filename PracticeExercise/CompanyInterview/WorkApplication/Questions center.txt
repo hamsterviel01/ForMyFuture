@@ -1,12 +1,13 @@
 Some note:
 - Write a clean and readable code as quick as possible.
+- Prepare 3 hours for this
 
 Here is agglomeration of Works Apps interview question:
 
 /****************************/
 Face to face interview:
 /****************************/
-1. Find the longest substring between 2 str
+1. Find the longest substring between 2 str --> find longest substring appear more than 1
 
 2. convert a string aaaabbbcc to a4b3c2
 
@@ -16,7 +17,27 @@ Face to face interview:
 
 5. Given an array of random numbers. Find longest monotonically increasing subsequence. Print all subsequence (LIS) in the array (http://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/)
 
-6. Print all the permutations of a string in sorted order
+6. Print all the permutations of a string in sorted order.
+
+7. Problem about segregating zeroes and ones in an array.
+
+8. Give a list of fractions, first reduce them to irreducible form and then sort them according to their value.  
+
+9. Find a sequence of creases in a paper which was fold n times.
+
+10. Given two numbers M and N, p is from [M,N] and q is from [1,p-1], find all irreducible fractions of p/q.
+
+11. Print the set of all points that was closest to a given point.
+
+12. Find the longest increasing order substring  
+
+Possible look through this: https://leetcode.com/problemset/algorithms/
+
+/*****************************/
+Aptitude test
+/*****************************/
+
+1. Know to calculate fraction and long division without calculator.
 
 /****************************/
 Online Coding Round
