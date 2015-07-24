@@ -1,0 +1,51 @@
+Some note:
+- Write a clean and readable code as quick as possible.
+
+Here is agglomeration of Works Apps interview question:
+
+/****************************/
+Face to face interview:
+/****************************/
+1. Find the longest substring between 2 str
+
+2. convert a string aaaabbbcc to a4b3c2
+
+3. validating the sequence of parantheses. For ex :- {{{}{}}} => check whether this is a correct sequence or not.
+
+4. whether a given string is a sub-string of another given string.
+
+5. Given an array of random numbers. Find longest monotonically increasing subsequence. Print all subsequence (LIS) in the array (http://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/)
+
+6. Print all the permutations of a string in sorted order
+
+/****************************/
+Online Coding Round
+/****************************/
+1. An orienteering map is to be given in the following format.
+   ########
+   #@....G#
+   ##.##@##
+   #..@..S#
+   #@.....#
+   ########
+Calculate the minimum distance from the start(S) to the goal(G) with passing all the checkpoints(@).
+Specification
+‘.’ means an opened-block that players can pass.
+‘#’ means a closed-block that players cannot pass.
+It is allowed to move only by one step vertically or horizontally.
+1 <= width <= 100, 1 <= height <= 100
+The maximum number of checkpoints is 18.
+Return -1 if given arguments do not satisfy specifications, or players cannot arrive at the goal from the start by passing all the checkpoints.
+Input
+The input is to be given in the following format, from the standard input.
+      W H
+      Row1
+      Row2   
+       ...
+      RowH
+The first row is to describe the width and the height of the orienteering map, sectioned by a space.
+Output
+Output into the standard output, and put a return.
+
+2. Implement a Immutable Queue in Java.
+
