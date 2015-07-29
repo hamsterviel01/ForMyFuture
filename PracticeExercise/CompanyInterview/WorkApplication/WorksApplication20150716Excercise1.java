@@ -5,6 +5,7 @@ import java.util.*;
 public class WorksApplication20150716Excercise1 {
 	public static String longestSubstring(String shortStr, String longStr){
 		Hashtable<Character, ArrayList<Integer>> charMap = new Hashtable<Character, ArrayList<Integer>>();
+		//This map will keep pair of char that has been compared and included: a1a1, a1a3, b4b5, etc.
 		HashSet<String> visitMap = new HashSet<String>();
 
 		//Store max substring
@@ -52,7 +53,7 @@ public class WorksApplication20150716Excercise1 {
 		return maxString.toString();
 	}
 
-	//Another solution run on O(m*n), using dynamic programing, same complexity but cleaner code
+	//Another solution run on O(m*n), using dynamic programing, same complexity but cleaner code, faster performance due to less string manipulation
 	public static String longestSubstring1(String str1, String str2){
 		if (str1 == null || str1.isEmpty() || str2 == null || str2.isEmpty()) return "";	
 		int[][] table = new int[str1.length()][str2.length()];
@@ -76,13 +77,10 @@ public class WorksApplication20150716Excercise1 {
 							//if the current LCS is the same as the last time this block ran
 							sb.append(String.valueOf(str1.charAt(i)));
 						} else {
+							//If the this new position was part of larger substring --> abandon current string builder.
 							sb = new StringBuilder();
-							if (i+1 < str1.length() - 1){
-								//Why i + 1?????
-								sb.append(str1.substring(thisSubBegin, i+1));
-							} else {
-								sb.append(str1.substring(thisSubBegin));
-							}
+							//Why i + 1????? --> substring[start, end) 
+							sb.append(str1.substring(thisSubBegin, i+1));
 							lastSubBegin = thisSubBegin;
 						}
 					}
@@ -90,13 +88,33 @@ public class WorksApplication20150716Excercise1 {
 			}
 		}
 
+		printTable(str1, str2, table);
+
 		return sb.toString();
+	}
+
+
+	//ultility function
+	public static void printTable(String str1, String str2, int[][] table){
+		System.out.printf("%2s", " ");
+		for (int j=0; j<str2.length(); j++) {
+			System.out.printf("%1s%1d", str2.charAt(j), j);
+		}
+		System.out.println();
+		for (int i=0; i<str1.length(); i++){
+			System.out.printf("%-1s%1d", str1.charAt(i), i);
+			for (int j=0; j<str2.length(); j++){
+				System.out.printf("%2d", table[i][j]);
+			}
+			System.out.println();
+		}
 	}
 
 
 	public static void main(String[] args){
 		System.out.println(longestSubstring("abcdeefghaik", "deefgabcikltegeefghaik"));
-		System.out.println(longestSubstring1("abcdeefghaik", "deefgabcikltegeefghaik"));
+		System.out.println(longestSubstring1("cabaaaafl", "bcaaaate"));
+		System.out.println("cabaaaafl".substring(0, 0));
 		//Worst case scenario
 		//System.out.println(longestSubstring("eeeeeeeeee", "eeeeeeeeeeeeeeeeeeeeeeeeee"));
 	}
