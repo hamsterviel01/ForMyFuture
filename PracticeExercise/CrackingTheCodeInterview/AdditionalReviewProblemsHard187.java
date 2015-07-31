@@ -1,76 +1,119 @@
 /**
-Solution from text book:
-- First, simplifiy: what if we only need to search for words with component of 2 words
-	+ divide that word into all possible pair --> check for each pair if the left can be found and the right can be found.
-- Upgrade it to words with unknown number of components
-	+ Find all possible left part, once found --> continue to search for left of right part.
+
 */
 
 import java.util.*;
 
 public class AdditionalReviewProblemsHard187 {
+	//Time complexity O(n*n)
 	public static String getLongestString(String[] input){
-		Hashtable<String, String> map = new Hashtable<String, String>();
-		for (int i=0; i<input.length; i++){
-			map.put(input[i], "unvisited");
-		}
-
+		//Using hashset to filter out duplicated element inside input --> caused this algo to never return false
+		Hashtable<Character, HashSet<String>> mapString = new Hashtable<Character, HashSet<String>>();
 		int maxLength = 0;
-		Stack<String> maxString = new Stack<String>();
+		int maxIndex = -1;
+
+		//Store first char as K and all of String which start with this char as V
 		for (int i=0; i<input.length; i++){
-			boolean composeOfStrings = containComponentAsString(input[i], map);
-			System.out.println(input[i] + ": " + composeOfStrings);
-			if (composeOfStrings){
-				if (maxLength < input[i].length()){
-					maxLength = input[i].length();
-					maxString.push(input[i]);
-				}
+			char c = input[i].charAt(0);
+			if (mapString.containsKey(c)){
+				mapString.get(c).add(input[i]);
+			} else {
+				mapString.put(c, new HashSet<String>(Arrays.asList(input[i])));
 			}
 		}
 
-		if (maxLength == 0){
-			return null;
-		} else {
-			return maxString.pop();
+		for (int i=0; i<input.length; i++){
+			if (maxLength < input[i].length()){
+				//First need to make sure mapString don't contain input[i]
+				mapString.get(input[i].charAt(0)).remove(input[i]);
+				if (isBuiltByComponentString(input[i], mapString)){
+					maxLength = input[i].length();
+					maxIndex = i;
+				}
+				mapString.get(input[i].charAt(0)).add(input[i]);
+			}
 		}
+
+		if (maxIndex == -1){
+			return null;
+		} 
+		return input[maxIndex];
 	}
 
-	public static boolean containComponentAsString(String str, Hashtable<String, String> map){
-		System.out.println("String: " + str);
-		if (str == null) return true;
-		if (map.containsKey(str)){
-			if (map.get(str) == "visistedAndFalse"){
-				return false;
-			} else if (map.get(str) == "visistedAndTrue") {
+	//Recursive to look for string.
+	public static boolean isBuiltByComponentString(String str, Hashtable<Character, HashSet<String>> mapString){
+		if (mapString.containsKey(str.charAt(0))) {
+			if (mapString.get(str.charAt(0)).contains(str)){
 				return true;
 			} else {
+				HashSet<String> list = mapString.get(str.charAt(0));
 
+				//do recursion isBuiltByComponentString for each element in list
+				Iterator<String> it = list.iterator();
+				while(it.hasNext()){
+					//check if list.get(i) match with str
+					String temp = it.next();
+
+					//if list.get(i) matched with str
+					if (temp.length() <= str.length()){
+						boolean moveNext = false;
+						for (int j=0; j<temp.length(); j++){
+							if (temp.charAt(j) != str.charAt(j)){
+								//move to next element in the list.
+								moveNext = true;
+								break;
+							}
+						}
+						if (!moveNext){
+							//stopping conditions --> if one of them is true --> all is true
+							if (isBuiltByComponentString(str.substring(temp.length()), mapString)) return true;
+						}
+					}
+				}
+
+				//if non of element is list is builtByComponentString --> return false as this str is 
+				return false;
 			}
-		}
-
-		ArrayList<Integer> optionsForRightPart = new ArrayList<Integer>();
-		for (int i=1; i<str.length(); i++){
-			String substr = str.substring(0, i);
-			//need to eliminate situation where substr == str
-			System.out.println(substr);
-			if (map.containsKey(substr)){
-				optionsForRightPart.add(i);
-			}
-		}
-
-		if (optionsForRightPart.isEmpty()){
-			return false;
 		} else {
-			boolean containComponent = false;
-			for (int i=0; i<optionsForRightPart.size(); i++) {
-				containComponent = containComponent || containComponentAsString(str.substring(optionsForRightPart.get(i)), map);
-			}
-			return containComponent;
+			return false;
 		}
 	}
 
 	public static void main(String[] args){
 		String[] input = new String[]{"defgh", "de", "def", "dedefgh", "abc"};
-		System.out.println(getLongestString(input));
+		String[] input1 = new String[]{"defgh", "de", "def", "abc", "dedefgh", "dedefgh", "abc", "abe", "abcdefdefgh", "fde", "abcdefdefghfg"};
+		System.out.println(getLongestString(input1));
 	}
 }
+
+/**From Cracking the Code Interview*/
+	// public static String getLongestString1(String arr[]) {
+	// 	HashMap<String, Boolean> map = new HashMap<String, Boolean>();
+	// 	for (String str : arr) {
+	// 		map.put(str, true);
+	// 	}
+	// 	Arrays.sort(arr, new LengthComparator()); // Sort by length
+	// 	for (String s : arr) {
+	// 		if (canBuildWord(s, true, map)) {
+	// 			System.out.println(s);
+	// 			return s;
+	// 		}
+	// 	}
+	// 	return "";
+	// }
+
+	// public static boolean canBuildWord(String str, boolean isOriginalWord, HashMap<String, Boolean> map) {
+	// 	if (map.containsKey(str) && !isOriginalWord) {
+	// 		return map.get(str);
+	// 	}
+
+	// 	for (int i = 1; i < str.length(); i++) {
+	// 		String left = str.substring(0, i);
+	// 		String right = str.substring(i);
+	// 		if (map.containsKey(left) && map.get(left) == true && canBuildWord(right, false, map)) {
+	// 			return true;
+	// 		}
+	// 	}
+	// 	map.put(str, false);
+	// 	return false;
+	// }
