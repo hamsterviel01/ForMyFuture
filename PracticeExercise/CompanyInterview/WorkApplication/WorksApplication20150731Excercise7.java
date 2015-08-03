@@ -5,6 +5,7 @@ public class WorksApplication20150731Excercise7 {
 	public static void printAllSortedPermu(String str){
 		TreeSet<String> list = populateAllPermu(str, str.length()-1);
 		System.out.println(list);
+		System.out.println(list.size());
 	}
 
 	public static TreeSet<String> populateAllPermu(String str, int end){
@@ -28,6 +29,6 @@ public class WorksApplication20150731Excercise7 {
 	}
 
 	public static void main(String[] args){
-		printAllSortedPermu("aaadef");
+		printAllSortedPermu("adef");
 	}
 }

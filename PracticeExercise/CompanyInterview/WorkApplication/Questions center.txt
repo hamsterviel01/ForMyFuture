@@ -21,7 +21,7 @@ Face to face interview:
 
 7. Print all the permutations of a string in sorted order.
 
-8. Problem about segregating zeroes and ones in an array.
+8. You are given an array of 0s and 1s in random order. Segregate 0s on left side and 1s on right side of the array. Traverse array only once.
 
 9. Give a list of fractions, first reduce them to irreducible form and then sort them according to their value.  
 
