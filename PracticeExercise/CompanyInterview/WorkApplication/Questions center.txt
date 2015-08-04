@@ -31,7 +31,7 @@ Face to face interview:
 
 12. Print the set of all points that was closest to a given point.
 
-13. Find the longest increasing order substring  
+13. You are given a string and you need to find a longest increasing substring from the given input(continuous).
 
 Possible look through this: https://leetcode.com/problemset/algorithms/
 

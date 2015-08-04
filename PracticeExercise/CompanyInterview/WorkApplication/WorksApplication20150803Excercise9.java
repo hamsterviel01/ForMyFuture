@@ -52,7 +52,7 @@ public class WorksApplication20150803Excercise9 {
 		int numerator = Integer.valueOf(fracs[0]);
 		int denumerator = Integer.valueOf(fracs[1]);
 		int tempNum = numerator;
-		int tempDenum = tempNum;
+		int tempDenum = denumerator;
 		int gcd = 0;
 
 		if (numerator > denumerator){
