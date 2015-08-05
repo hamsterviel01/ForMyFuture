@@ -24,7 +24,6 @@ public class RecursionAndDynamicProgramming92 {
 		possibleRoute[0][1] = 1;
 		possibleRoute[1][0] = 1;
 		possibleRoute[1][1] = 2;
-
 		
 		return countPossibleRoute(x, y, possibleRoute);
 	}
