@@ -15,42 +15,6 @@ Lesson learnt in this exercise:
 */
 
 public class RecursionAndDynamicProgramming95 {
-	/**Bottom up Approach*/
-	public static void printAllPermutation(String input, int endIndex, HashSet<String> allPermutation){
-		HashSet<String> allNewPermutation = new HashSet<String>();
-		if (endIndex < input.length()){
-			char c = input.charAt(endIndex);
-			for (String str: allPermutation){
-				for (int i = 0; i<=endIndex-1; i++){
-					String newPermu = str.substring(0, i) + c +str.substring(i);
-					allNewPermutation.add(newPermu);
-				}
-				allNewPermutation.add(str + c);
-			}
-			allPermutation.clear();
-			for (String str: allNewPermutation){
-				allPermutation.add(str);
-			}
-			printAllPermutation(input, endIndex+1, allPermutation);
-		}
-	}
-
-	public static HashSet<String> allPermutation(String input){
-		HashSet<String> allPermutation = new HashSet<String>();
-		if (input.length() == 0 || input.length() == 1){
-			allPermutation.add(input);
-			return allPermutation;
-		}
-		allPermutation.add(String.valueOf(input.charAt(0)) + String.valueOf(input.charAt(1)));
-		allPermutation.add(String.valueOf(input.charAt(1)) + String.valueOf(input.charAt(0)));
-		if (input.length() == 2){
-			return allPermutation;
-		}
-
-		printAllPermutation(input, 2, allPermutation);
-		return allPermutation;
-	}
-
 	/**Top Down approach*/
 	public static String insertChar(String str, char c, int pos){
 		StringBuilder strBuilder = new StringBuilder();
@@ -69,9 +33,8 @@ public class RecursionAndDynamicProgramming95 {
 			permutations.add(input);
 			return permutations;
 		}
-		String word = input.substring(1);
 		char c = input.charAt(0);
-		HashSet<String> newPermutations = generateAllPermutation(word);
+		HashSet<String> newPermutations = generateAllPermutation(input.substring(1));
 		for (String permu: newPermutations){
 			for(int i=0; i<permu.length(); i++){
 				permutations.add(insertChar(permu, c, i));
@@ -82,12 +45,8 @@ public class RecursionAndDynamicProgramming95 {
 	}
 
 	public static void main(String[] args){
-		HashSet<String> set = generateAllPermutation("abcd");
-		int count = 0;
-		for (String str: set){
-			count++;
-		}
+		HashSet<String> set = generateAllPermutation("abcc");
+		System.out.println(set.size());
 		System.out.println(set);
-		System.out.println(count);
 	}
 }

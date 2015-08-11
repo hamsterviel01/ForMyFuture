@@ -1,43 +1,93 @@
 import java.util.*;
 
-public class RecursionAndDynamicProgramming92 {
-	//Follow up probleam
-	public static boolean findPossibleRoute(int x, int y, Hashtable<Point, boolean> visited){
-		Point currentPos = new Point(x, y);
+/**
+Algorithm
 
-		//found a path.
+*/
+
+public class RecursionAndDynamicProgramming92 {
+
+	//Follow up probleam
+	public static boolean findPossibleRoute(int x, int y, ArrayList<Point> path, Hashtable<Point, Boolean> points){
+		Point currentPoint = new Point(x, y);
 		if (x == 0 && y == 0){
 			return true;
 		}
-		//if left node is free
-		if (offLimitPoints.containsKey()){
 
+		if (!isFree(0, 0)){
+			return false;
 		}
 
+		if (points.containsKey(currentPoint)){
+			return false;
+		}
+
+		boolean success = false;
+		points.put(currentPoint, false);
+		if (x > 0 && isFree(x-1, y)){
+			success = findPossibleRoute(x-1, y, path, points);
+		} else if (y > 0 && isFree(x, y-1)){
+			success = findPossibleRoute(x, y-1, path, points);
+		} else {
+			success = false;
+		}
+
+		if (success){
+			path.add(currentPoint);
+		}
+		//points.put(currentPoint, success);
+		return success;
 	}
 
-	public static isFree(int x, int y){
-		
+	public static boolean isFree(int x, int y){
+		boolean[][] blockages = new boolean[][] {
+			{true, true, true, true},
+			{true, true, false, false},
+			{true, false, true, true},
+			{true, false, true, true}
+		};
+
+		return blockages[x][y];
 	}
 
 	public static void main(String[] args){
-		Scanner scan = new Scanner(System.in);
-		int x = scan.nextInt();
-		int y = scan.nextInt();
+		Hashtable<Point, Boolean> points = new Hashtable<Point, Boolean>();
+		ArrayList<Point> path = new ArrayList<Point>();
+		System.out.println(findPossibleRoute(3, 3, path, points));
 
-		System.out.println(count(x, y));
+		//Print out path
+		Iterator<Point> it = path.iterator();
+		while(it.hasNext()){
+			Point entry = it.next();
+			System.out.println(entry.x + ":" + entry.y);
+		}
 	}
 }
 
 class Point {
 	int x;
 	int y;
-	boolean isFree = true;
-	Point(int x, int y) {
-		x = this.x;
-		y = this.y;
+	Point(int x, int y){
+		this.x = x;
+		this.y = y;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // 	public static int countPossibleRoute(int x, int y, int[][] possibleRoute){
 // 		if (x == 0 || y == 0){
