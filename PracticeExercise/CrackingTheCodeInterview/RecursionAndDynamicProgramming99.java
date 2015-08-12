@@ -10,6 +10,68 @@ Lesson learnt:
 public class RecursionAndDynamicProgramming99 {
 	static int GRID_SIZE = 8;
 
+	public static void placeQueens(int row, ArrayList<Integer[]> results, Integer[] queensPos){
+		//Place queen row by row
+		for (int j=0; j<GRID_SIZE; j++){
+			if (isValid(row, j, queensPos)){
+				if (row == GRID_SIZE-1){
+					queensPos[row] = j;
+					results.add(queensPos.clone());
+				} else {
+					queensPos[row] = j;
+					placeQueens(row+1, results, queensPos);
+				}
+			}
+		}
+	}
+
+	public static boolean isValid(int row, int column, Integer[] queensPos){
+		for (int i=0; i<row; i++){
+			//Check if there is any queen at the same columns
+			if (column == queensPos[i]){
+				return false;
+			}
+
+			//check if they share the same diagonal
+			int rowSubtract = row - i;
+			int columnSubtract = Math.abs(column - queensPos[i]);
+			if (rowSubtract == columnSubtract){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static void main(String[] args){
+		Integer[] queensPos = new Integer[GRID_SIZE];
+		ArrayList<Integer[]> results = new ArrayList<Integer[]>();
+
+		placeQueens(0, results, queensPos);
+
+		//count no of pos
+		int count = 0;
+		for (Integer[] queenPos: results){
+			for (int i=0; i<queenPos.length; i++){
+				System.out.print(i*10 + queenPos[i] + " ;");
+			}
+			System.out.println();
+			count++;
+		}
+		System.out.println(count);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+/**
 	public static void placeQueens(int row, Integer[] columns, ArrayList<Integer[]> results) {
 		if (row == GRID_SIZE) { // Found valid placement
 			results.add(columns.clone());
@@ -27,24 +89,24 @@ public class RecursionAndDynamicProgramming99 {
 	* if there is a queen in the same column or diagonal. We don't
 	* need to check it for queens in the same row because the calling
 	* placeQueen only attempts to place one queen at a time. We know
-	* this row is empty. */
+	* this row is empty. 
 	public static boolean checkValid(Integer[] columns, int rowl, int columnl) {
 		for (int row2 = 0; row2 < rowl; row2++) {
 			int column2 = columns[row2];
 			/* Check if (row2, column2) invalidates (rowl, columnl) as a
-			* queen spot. */
+			* queen spot. 
 
-			/* Check if rows have a queen in the same column */
+			/* Check if rows have a queen in the same column
 			if (columnl == column2) {
 				return false;
 			}
 
 			/* Check diagonals: if the distance between the columns
 			* equals the distance between the rows, then they're in the
-			* same diagonal. */
+			* same diagonal. 
 			int columnDistance = Math.abs(column2 - columnl);
 
-			/* rowl > row2, so no need for abs */
+			/* rowl > row2, so no need for abs
 			int rowDistance = rowl - row2;
 			if (columnDistance == rowDistance) {
 				return false;
@@ -68,7 +130,7 @@ public class RecursionAndDynamicProgramming99 {
 		}
 		System.out.println(count);
 	}
-}
+*/
 
 /**
 My incorrect and inefficient solution:

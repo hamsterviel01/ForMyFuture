@@ -1,46 +1,39 @@
+import java.util.*;
+
 public class RecursionAndDynamicProgramming910 {
-	static int[] w;
-	static int[] h;
-	static int[] d;
-	static int maxN;
-
-	//Even better, need to return all largest stacks from n boxes
-	public static void buildStack(int n, ArrayList<LinkedList<Integer>> stacks, ArrayList<Integer> height){
-		//stacks is for buildStack(n-1) produce;
-		for (int i=0; i<stacks.size(); i++){
-			LinkedList<Integer> componentList = stacks.get(i);
-			int j=0;
-			while (j<componentList.size()){
-				if (isLarger(componentList.get(j), n)){
-					if (isLarger(n, componentList.get(j+1))){
-						componentList.insert(j+1, n);
-					} else {
-						createNewComponentList(stacks, i, j, n);
-					}
+	public static void buildStack(int[] w, int[] h, int[] d, int index, _<Integer> maxHeight, int currentHeight){
+		int temp = currentHeight;
+		for (int i=0; i<w.length; i++){
+			if (isSmaller(w, h, d, i, index)){
+				currentHeight++;
+				System.out.println("currentHeight: " + currentHeight + " index: " + index + " i: " + i);
+				if (currentHeight > maxHeight){
+					maxHeight = currentHeight;
+					System.out.println("maxHeight: " + maxHeight);
 				}
-
+				buildStack(w, h, d, i, maxHeight, currentHeight);
 			}
-		}
-
-		if (n < w.length){
-			buildStack(n+1, stacks, height);
+			currentHeight = temp;
 		}
 	}
-	
-	public boolean isLarger(int i, int j){
-		if (w[i]>= w[j] && h[i]>=h[j] && d[i]>=d[j]){
-			return true;
+
+	public static boolean isSmaller(int[] w, int[] h, int[] d, int index1, int index2){
+		return w[index1] < w[index2] && h[index1] < h[index2] && d[index1] < d[index2];
+	}
+
+	public static int buildStack(int[] w, int[] h, int[] d){
+		_<Integer> maxHeight = new _<Integer>(0);
+		for (int i=0; i<w.length; i++){
+			buildStack(w, h, d, i, maxHeight, 0);		
 		}
-		return false;
+
+		return maxHeight;
 	}
 
-	public void createNewComponentList(ArrayList<LinkedList<Integer>> stacks, int i, int j, int n){
-
-	}
-
-	public static LinkedList<Integer> getHightStack(int[] w, int[] h, int[] d){
-		ArrayList<LinkedList<Integer>> stacks = new ArrayList<LinkedList<Integer>>(Arrays.asList(0));
-
-		buildStack(0, stacks);
+	public static void main(String[] args){
+		int[] w = new int[]{1, 2, 3, 4};
+		int[] h = new int[]{1, 2, 3, 4};
+		int[] d = new int[]{1, 2, 3, 4};
+		System.out.println("Max height of stack: " + buildStack(w, h, d));
 	}
 }

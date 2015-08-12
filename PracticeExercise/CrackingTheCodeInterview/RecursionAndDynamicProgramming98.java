@@ -1,4 +1,7 @@
-import java.util.*;
+/**
+2 solution share the same speed, 
+but solving this case using recursive method is cleaner
+*/
 
 public class RecursionAndDynamicProgramming98 {
 	public static int calculateCombination(int n){
@@ -18,7 +21,6 @@ public class RecursionAndDynamicProgramming98 {
 		return count;
 	}
 
-	/**Solved using recursive method - faster*/
 	public static int calculateCombinationRecur(int n, int denom){
 		int next_denom = 0;
 		int way  = 0;
