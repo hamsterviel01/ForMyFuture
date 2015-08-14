@@ -2,8 +2,8 @@ public class SortingAndSearching15 {
 	//This algo don't accept "value" as empty string
 	public static int findString(String[] strArray, String value, int start, int end){
 		int mid = (start+end)/2;
-		int beforeMid = mid - 1;
-		int afterMid = mid + 1;
+		int beforeMid = mid ;
+		int afterMid = mid ;
 
 		if (strArray[mid] == value){
 			return mid;
@@ -28,6 +28,7 @@ public class SortingAndSearching15 {
 		if (start == beforeMid) return -1;
 		return findString(strArray, value, start+1, beforeMid);
 	}
+
 	public static int findString(String[] strArray, String value){
 		if (strArray.length == 0) return -1;
 		int start = 0;
@@ -43,5 +44,9 @@ public class SortingAndSearching15 {
 			end--;
 		}
 		return findString(strArray, value, start, end);
+	}
+
+	public static void main(String[] args){
+		String[] strArray = new String[]{"abd", "bbd", "c", ""};
 	}
 }

@@ -4,6 +4,7 @@ Lesson learnt:
 */
 
 public class SortingAndSearching13 {
+	//Algorithm: 
 	public static int findElementIndex(int[] array, int value, int start, int end){
 		int mid = (start + end)/2;
 		if (value == array[mid]){

@@ -27,7 +27,15 @@ public class SortingAndSearching12 {
 	}
 
 	public static String sortString(String str){
-		return null;
+		char[] strChar = str.toCharArray();
+	}
+
+	public static char[] sortString(char[] strChar, int start, int end){
+		for (int i=0; 2*i)
+	}
+
+	public heapify(char[] strChar, int start, int end){
+		
 	}
 
 	public static void main(String[] args){

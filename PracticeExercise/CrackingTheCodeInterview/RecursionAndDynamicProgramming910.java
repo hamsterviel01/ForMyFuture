@@ -1,39 +1,50 @@
 import java.util.*;
 
 public class RecursionAndDynamicProgramming910 {
-	public static void buildStack(int[] w, int[] h, int[] d, int index, _<Integer> maxHeight, int currentHeight){
-		int temp = currentHeight;
+	static int[] w = new int[]{2, 1, 3, 4, 5};
+	static int[] h = new int[]{2, 1, 5, 4, 4};
+	static int[] d = new int[]{2, 1, 3, 4, 4};
+
+	//return max height of stack
+	public static ArrayList<Integer> buildStack(int currentIndex, ArrayList<Integer> currentStack, Hashtable<Integer, ArrayList<Integer>> storeMax){
+		ArrayList<Integer> maxStack = (ArrayList<Integer>)currentStack.clone();
 		for (int i=0; i<w.length; i++){
-			if (isSmaller(w, h, d, i, index)){
-				currentHeight++;
-				System.out.println("currentHeight: " + currentHeight + " index: " + index + " i: " + i);
-				if (currentHeight > maxHeight){
-					maxHeight = currentHeight;
-					System.out.println("maxHeight: " + maxHeight);
+			if (isSmaller(i, currentIndex)){
+				//Continue to build stack, thus we need a variable height for this
+				ArrayList<Integer> temp = (ArrayList<Integer>)currentStack.clone();
+				if (storeMax.containsKey(i)){
+					temp.addAll(storeMax.get(i));
+				} else {
+					ArrayList<Integer> temp2 = (ArrayList<Integer>)currentStack.clone();
+					temp2.add(i);
+					temp = buildStack(i, temp2, storeMax);
 				}
-				buildStack(w, h, d, i, maxHeight, currentHeight);
+				if (maxStack.size() < temp.size()){
+					maxStack = (ArrayList<Integer>)temp.clone();
+				}
 			}
-			currentHeight = temp;
 		}
+		storeMax.put(currentIndex, maxStack);
+		return maxStack;
 	}
 
-	public static boolean isSmaller(int[] w, int[] h, int[] d, int index1, int index2){
+	public static ArrayList<Integer> returnMaxHeight(){
+		Hashtable<Integer, ArrayList<Integer>> storeMax = new Hashtable<Integer, ArrayList<Integer>>();
+		ArrayList<Integer> maxStack = new ArrayList<Integer>();
+		for (int i=0; i<w.length; i++){
+			ArrayList<Integer> temp = buildStack(i, new ArrayList<Integer>(Arrays.asList(i)), storeMax);
+			if (maxStack.size() < temp.size()){
+				maxStack = (ArrayList<Integer>)temp.clone();
+			}
+		}
+		return maxStack;
+	}
+
+	public static boolean isSmaller(int index1, int index2){
 		return w[index1] < w[index2] && h[index1] < h[index2] && d[index1] < d[index2];
 	}
 
-	public static int buildStack(int[] w, int[] h, int[] d){
-		_<Integer> maxHeight = new _<Integer>(0);
-		for (int i=0; i<w.length; i++){
-			buildStack(w, h, d, i, maxHeight, 0);		
-		}
-
-		return maxHeight;
-	}
-
 	public static void main(String[] args){
-		int[] w = new int[]{1, 2, 3, 4};
-		int[] h = new int[]{1, 2, 3, 4};
-		int[] d = new int[]{1, 2, 3, 4};
-		System.out.println("Max height of stack: " + buildStack(w, h, d));
+		System.out.println("Max  stack is " + returnMaxHeight());
 	}
 }
