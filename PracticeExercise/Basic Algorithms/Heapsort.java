@@ -15,8 +15,6 @@ public class Heapsort {
 		if (end > 1){
 			heapsort(input, end-1);
 		}
-
-
 	}
 
 	//Remember heapify take 3 args
