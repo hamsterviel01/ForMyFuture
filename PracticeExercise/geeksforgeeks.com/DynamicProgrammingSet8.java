@@ -18,34 +18,44 @@ public class DynamicProgrammingSet8 {
 		return minValue;
 	}
 
-	public static void main(String[] args){
-		ArrayList<Integer> input = new ArrayList<Integer>(Arrays.asList(100, 60, 8, 50, 7));
-		System.out.println(smallestOperations(input));
-	}
-}
+	//Dynamic Programming
+	public static int smallestOperationsDynamic(ArrayList<Integer> input, int[][] cacheResult, int start, int end){
+		if (cacheResult[start][end] != -1){
+			return cacheResult[start][end];
+		}
 
-/**
-	This algorithm is wrong because it base on following assumption
-		- {a, b, c, d} if b > c --> a*b*c + a*c*d < b*c*d + a*b*d
-	This assumption is wrong because if a >> d while b > c --> the inequation will be reverted.
-	public static int smallestOperations(ArrayList<Integer> input){
-		if (input.size() < 3) return 0;
-
-		ArrayList<Integer> tempArr = (ArrayList<Integer>)input.clone();
-		int maxIndex = searchBiggest(input);
-		tempArr.remove(maxIndex);
-
-		return input.get(maxIndex-1)*input.get(maxIndex)*input.get(maxIndex+1) + smallestOperations(tempArr);
-	}
-
-	//utility func
-	public static int searchBiggest(ArrayList<Integer> input){
-		int maxIndex = 1;
-		for(int i=2; i<input.size()-1; i++){
-			if (input.get(i) > input.get(maxIndex)){
-				maxIndex = i;
+		int minValue = Integer.MAX_VALUE;
+		for (int i=start; i<end; i++){
+			int temp = smallestOperationsDynamic(input, cacheResult, start, i) + smallestOperationsDynamic(input, cacheResult, i+1, end) + 
+				input.get(start)*input.get(i+1)*input.get(end+1);
+			if (temp < minValue){
+				minValue = temp;
 			}
 		}
-		return maxIndex;
+
+		cacheResult[start][end] = minValue;
+
+		return minValue;
 	}
-*/
+
+	public static int smallestOperationsDynamic(ArrayList<Integer> input){
+		int[][] cacheResult = new int[input.size()][input.size()];
+
+		for (int i=0; i<cacheResult.length; i++){
+			for (int j=0; j<cacheResult.length; j++){
+				if (i==j){
+					cacheResult[i][j] = 0;
+				} else {
+					cacheResult[i][j] = -1;
+				}
+			}
+		}
+
+		return smallestOperationsDynamic(input, cacheResult, 0, input.size()-2);
+	}
+
+	public static void main(String[] args){
+		ArrayList<Integer> input = new ArrayList<Integer>(Arrays.asList(100, 60, 8, 50, 7, 34, 15, 67, 78, 100, 60, 8, 50, 7, 34, 15, 67, 78));
+		System.out.println(smallestOperationsDynamic(input));
+	}
+}
