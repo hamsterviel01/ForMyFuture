@@ -38,6 +38,11 @@ public class DynamicProgrammingSet10 {
 		return getMaxValueDynamic(val, weight, remainWeight, maxValueCache);
 	}
 
+	//Dynamic solution from geekstogeeks is better in the sense that it don't need to have O(n) complexity
+	public static int getMaxValueDynamicGFG(int[] val, int[] weight, int index){
+		return 0;
+	}
+
 	public static void main(String[] args){
 		int[] val = new    int[]{0, 9, 8, 7, 4, 5, 3, 11, 9, 8, 7, 4, 5, 3, 11, 9, 8, 7, 4, 5, 3, 11, 9, 8, 7, 4, 5, 3, 11};
 		int[] weight = new int[]{0, 4, 2, 3, 2, 2, 5, 4 , 9, 8, 7, 4, 5, 3, 11, 4, 2, 3, 2, 2, 5, 4 , 9, 8, 7, 4, 5, 3, 11};
