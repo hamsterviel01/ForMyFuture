@@ -55,18 +55,21 @@ public class Main {
 				count++;
 			}
 
+			ArrayList<Query> query = new ArrayList<Query>();
 			String inputLine;
 			while (count <= n+m-1 && (inputLine = rd.readLine()) != null && inputLine.length() > 0){
 				String[] temp = inputLine.split(" ");
-				int q = Integer.valueOf(temp[0]);
-				int c = Integer.valueOf(temp[1]);
-				if (q == 1){
-					isFestive[c] = true;
-				} else if (q == 2) {
-					int result = calculateShortestPath(c, islandMap, isFestive);
+				query.add(new Query(Integer.valueOf(temp[0]), Integer.valueOf(temp[1])));
+				count++;
+			}
+
+			for (Query q: query){
+				if (q.type == 1){
+					isFestive[q.city] = true;
+				} else if (q.type == 2) {
+					int result = calculateShortestPath(q.city, islandMap, isFestive);
 					output.add(result);
 				}
-				count++;
 			}
 
 			//Print output
@@ -91,5 +94,14 @@ class City {
 	City(int name, int distance){
 		this.name = name;
 		this.distance = distance;
+	}
+}
+
+class Query {
+	int type;
+	int city;
+	Query(int type, int city){
+		this.type = type;
+		this.city = city;
 	}
 }

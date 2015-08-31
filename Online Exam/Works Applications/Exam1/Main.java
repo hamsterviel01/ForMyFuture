@@ -1,4 +1,3 @@
-import java.util.*;
 import java.io.*;
 
 /**
@@ -7,6 +6,16 @@ maxPoint(x, y) = matrix[x][y] + maxValue(maxPoint(x, y+1), maxPoint(x-1, y, excl
 */
 
 public class Main {
+//	public static void printCache(long[][] cache){
+//		System.out.print("///////////////////////////");
+//		for (int i=0; i<cache.length; i++){
+//			for (int j=0; j<cache[0].length; j++){
+//				System.out.print(cache[i][j] + " ");
+//			}
+//			System.out.println();
+//		}
+//	}
+	
 	public static long findMaximumPoint(int[][] matrixPoint){
 		int maxX = matrixPoint.length-1;
 		long[][] cache = new long[matrixPoint.length][matrixPoint[0].length];
@@ -28,6 +37,10 @@ public class Main {
 			}
 		}
 
+//		printCache(cache);
+//		printCache(cacheUp);
+//		printCache(cacheDown);
+		
 		//Usual algorithm will never reach these point, but the snake can still access it through teleport, so we still need to consider it
 		//Dont need to care if value of this point is -1, it will be checked at findMaximumPoint func
 		//Value of matrixPoint at y = 0 has been taken care of, now we only need to care about y = 1 and onward
@@ -45,7 +58,10 @@ public class Main {
 				}
 			}		
 		}
-
+//		System.out.println("----------------------------------");
+//		printCache(cache);
+//		printCache(cacheUp);
+//		printCache(cacheDown);
 		return max;
 	}
 
@@ -68,8 +84,7 @@ public class Main {
 		long up = findMaximumPointUp(matrixPoint, x-1, y, cache, cacheUp, cacheDown);
 		long down = findMaximumPointDown(matrixPoint, x+1, y, cache, cacheUp, cacheDown);
 		long right = findMaximumPoint(matrixPoint, x, y+1, cache, cacheUp, cacheDown);
-		long tempMax = Math.max(up, down);
-		long max = Math.max(tempMax, right);
+		long max = Math.max(Math.max(up, down), right);
 		if (max == -1){
 			cache[x][y] = -1;		
 		} else {
@@ -133,7 +148,6 @@ public class Main {
 		} else {
 			cacheDown[x][y] = matrixPoint[x][y] + max;
 		}
-		cacheDown[x][y] = matrixPoint[x][y] + Math.max(right, down);
 		return cacheDown[x][y];
 	}
 
