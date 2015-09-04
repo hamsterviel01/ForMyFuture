@@ -50,7 +50,7 @@ public class WorksApplication20150730Excercise6 {
 	}
 
 	public static void main(String[] args){
-		int[] input = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+		int[] input = new int[]{5, 8, 10, 6, 7, 8, 13, 9, 17, 14};
 		printMonoIncreaseSequence(input);
 	}
 }

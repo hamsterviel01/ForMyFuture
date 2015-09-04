@@ -2,33 +2,16 @@ import java.util.*;
 import java.io.*;
 
 public class DynamicProgrammingSet12 {
-	public static int longestPalindrome(char[] str, int start, int end, int[][] cache){
-		if (start > end) return 0;
-		if (cache[start][end] != 0){
-			return cache[start][end];
-		}
-		if (start == end) {
-			cache[start][end] = 1;
-			return 1;
-		}
-
-		if (str[start] == str[end]){
-			if (start+1 == end){
-				cache[start][end] = 2;
-				return 2;
-			} else {
-				cache[start][end] = longestPalindrome(str, start+1, end-1, cache) + 2; //how about bb case
-				return cache[start][end];
-			}
-		}
-
-		//if (str[start] != str[end]){ 
-		return Math.max(longestPalindrome(str, start+1, end, cache), longestPalindrome(str, start, end-1, cache));
+	//this need to be appoarch bottom up
+	public static int longestPalindrome(char[] str, int start, int end, int[][] cache, boolean[][] isPalindrome){
+		int[][] cache;
+		
 	}
 
 	public static int longestPalindrome(String str){
 		char[] charArr = str.toCharArray();
 		int[][] cache = new int[str.length()][str.length()];
+		boolean[][] isPalindrome = new boolean[str.length()][str.length()];
 
 		if (charArr.length == 0 || charArr.length == 1) return charArr.length;
 		return longestPalindrome(charArr, 0, charArr.length-1, cache);
