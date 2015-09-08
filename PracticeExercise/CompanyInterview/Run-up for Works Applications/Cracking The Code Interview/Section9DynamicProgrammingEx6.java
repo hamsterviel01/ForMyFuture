@@ -2,7 +2,6 @@ import java.util.*;
 
 public class Section9DynamicProgrammingEx6 {
 	public static HashSet<String> generateAllValidParentheses(int n){
-		
 		if (n==1) {
 			return new HashSet<String>(Arrays.asList("()"));
 		}
@@ -20,7 +19,7 @@ public class Section9DynamicProgrammingEx6 {
 		}
 		return newSet;
 	}
-
+	
 	public static void main(String[] args){
 		System.out.println(generateAllValidParentheses(4));
 	}
