@@ -34,19 +34,20 @@ public class WorksApplicationsExcercise7 {
 		return newPermu;
 	}
 
-	public static TreeSet<String> sortAllPermuatation(String str){
+	public static ArrayList<String> sortAllPermuatation(String str){
 		ArrayList<String> allPermu = allPermutation(str, str.length() - 1);
-		TreeSet<String> allSortedPermu = new TreeSet<String>();
+		// TreeSet<String> allSortedPermu = new TreeSet<String>();
 
-		for (String permu: allPermu){
-			//O(log(n)) for add
-			allSortedPermu.add(permu);
-		}
+		// for (String permu: allPermu){
+		// 	//O(log(n)) for add
+		// 	allSortedPermu.add(permu);
+		// }
 
-		return allSortedPermu;
+		// return allSortedPermu;
+		return allPermu;
 	}
 
 	public static void main(String[] args){
-		System.out.println(sortAllPermuatation("defghik"));
+		System.out.println(sortAllPermuatation("abcdefghi"));
 	}
 }
