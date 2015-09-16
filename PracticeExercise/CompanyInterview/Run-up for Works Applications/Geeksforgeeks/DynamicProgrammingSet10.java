@@ -42,7 +42,7 @@ public class DynamicProgrammingSet10 {
 	public static void main(String[] args){
 		int[] val = new    int[]{0, 9, 8, 7, 4, 5, 3, 11};
 		int[] weight = new int[]{0, 4, 2, 3, 2, 2, 5, 4 };
-		int remainWeight = 900000;
+		int remainWeight = 9000;
 
 		System.out.println(getMaxValueDynamic(val, weight, remainWeight));
 	}

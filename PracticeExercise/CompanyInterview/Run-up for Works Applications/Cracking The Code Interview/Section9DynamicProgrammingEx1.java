@@ -16,6 +16,6 @@ public class Section9DynamicProgrammingEx1 {
 	}
 
 	public static void main(String[] args){
-		System.out.println(possibleWaysToRunUp(7));
+		System.out.println(possibleWaysToRunUp(9000));
 	}
 }

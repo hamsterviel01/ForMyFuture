@@ -1,60 +1,49 @@
 import java.util.*;
 
 public class Section9DynamicProgrammingEx9 {
-	final static int SIZE = 4;
-	public static void returnQueenPos(int[] queenPos, int currentRow, ArrayList<int[]> maps) {
-		if (currentRow == SIZE){
-			maps.add(queenPos);
-			return;
-		}
-		//There is no column 0 --> avoid later situation with position where column = 0
-		for (int column=1; column<=SIZE; column++){
-			if (isValid(currentRow, column, queenPos)){
-				int[] newArr = (int[])queenPos.clone(); 
-				newArr[currentRow] = column;
-				returnQueenPos(newArr, currentRow+1, maps);
-			}
-		}
-	}
-
-	public static ArrayList<int[]> returnQueenPos(){
-		ArrayList<int[]> maps = new ArrayList<int[]>();
-		returnQueenPos(new int[SIZE], 0, maps);
-		return maps;
-	}
-
-	public static boolean isValid(int row, int column, int[] queenPos){
-		//queenPos is empty
-		if (queenPos[0] == 0) return true;
-		
-		//We should only consider i that is smaller that row
+	public static boolean checkValid(int[] allPos, int row, int col){
 		for (int i=0; i<row; i++){
-			//Check vertically and horizontally
-			if (column == queenPos[i]){
+			if (allPos[i] == col){
 				return false;
 			}
-
-			//Check diagonally, 
-			if (Math.abs(column - queenPos[i]) == (row - i)){
+			if (Math.abs(allPos[i] - col) == row - i){
 				return false;
 			}
 		}
-
 		return true;
 	}
-
-	public static void printArrayList(ArrayList<int[]> arrs){
-		for (int[] arr: arrs){
-			System.out.print("{");
-			for (int i=0; i<arr.length; i++){
-				int temp = i + 1;
-				System.out.print(" (" + temp + ", " + arr[i] + ") ");
+	
+	public static ArrayList<int[]> getAllValidPos(int n){
+		int[] allPos = new int[n];
+		ArrayList<int[]> allPosiblePos = new ArrayList<int[]>();
+		for (int i=0; i<n; i++){
+			allPos[0] = i;
+			getAllValidPos(allPos, 1, allPosiblePos);
+		}
+		return allPosiblePos;
+	}
+	
+	public static void getAllValidPos(int[] allPos, int row, ArrayList<int[]> allPosiblePos){
+		if (row == allPos.length){
+			int[] temp = (int[])allPos.clone();
+			allPosiblePos.add(temp);
+			return;
+		}
+		for (int i=0; i<allPos.length; i++){
+			if (checkValid(allPos, row, i)){
+				allPos[row] = i;
+				getAllValidPos(allPos, row+1, allPosiblePos);
 			}
-			System.out.print("}\n");
 		}
 	}
-
+	
 	public static void main(String[] args){
-		printArrayList(returnQueenPos());
+		ArrayList<int[]> result = getAllValidPos(5);
+		for (int[] pos: result){
+			for (int i=0; i<pos.length; i++){
+				System.out.print(pos[i] + " ");
+			}
+			System.out.println();
+		}
 	}
 }

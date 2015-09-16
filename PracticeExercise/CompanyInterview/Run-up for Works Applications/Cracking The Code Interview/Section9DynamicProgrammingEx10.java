@@ -1,45 +1,42 @@
 import java.util.*;
 
 public class Section9DynamicProgrammingEx10 {
-	public static ArrayList<Integer> buildHighestStack(int[] w, int[] d, int[] h, int bottomIndex, HashMap<Integer, ArrayList<Integer>> cache){
+	public static ArrayList<Integer> buildHighestStack(int[] w, int[] h, int[] d){
+		Hashtable<Integer, ArrayList<Integer>> cache = new Hashtable<Integer, ArrayList<Integer>>();
 		ArrayList<Integer> maxStack = new ArrayList<Integer>();
 		for (int i=0; i<w.length; i++){
-			if (w[i] < w[bottomIndex] && h[i] < h[bottomIndex] && d[i] < d[bottomIndex]){
-				if (!cache.containsKey(i)){	
-					cache.put(i, buildHighestStack(w, d, h, i, cache));
-				}
-				ArrayList<Integer> highestStack = cache.get(i);
-				if (highestStack.size() > maxStack.size()){
-					maxStack = highestStack;
-				}
+			ArrayList<Integer> temp = buildHighestStack(w, h, d, i, cache);
+			if (temp.size() > maxStack.size()){
+				maxStack = temp;
 			}
 		}
-
-		ArrayList<Integer> currentMaxStack = (ArrayList<Integer>)maxStack.clone();
-		currentMaxStack.add(bottomIndex);
-		return currentMaxStack;
-	}
-
-	public static ArrayList<Integer> buildHighestStack(int[] w, int[] d, int[] h){
-		ArrayList<Integer> maxStack = new ArrayList<Integer>();
-		HashMap<Integer, ArrayList<Integer>> cache = new HashMap<Integer, ArrayList<Integer>>();
-		for (int i=0; i<w.length; i++){
-			if (!cache.containsKey(i)){	
-				cache.put(i, buildHighestStack(w, d, h, i, cache));
-			}
-			ArrayList<Integer> highestStack = cache.get(i);
-			if (highestStack.size() > maxStack.size()){
-				maxStack = highestStack;
-			}
-		}
+		
 		return maxStack;
 	}
-
+	
+	public static ArrayList<Integer> buildHighestStack(int[] w, int[] h, int[] d, int top, Hashtable<Integer, ArrayList<Integer>> cache){
+		if (cache.containsKey(top)) return cache.get(top);
+		
+		ArrayList<Integer> maxStack = new ArrayList<Integer>();
+		for (int i=0; i<w.length; i++){
+			if (w[i] < w[top] && h[i] < h[top] && d[i] < d[top]){
+				ArrayList<Integer> temp = buildHighestStack(w, h, d, i, cache);
+				if (temp.size() > maxStack.size()){
+					maxStack = temp;
+				}
+			}
+		}
+		ArrayList<Integer> temp = (ArrayList<Integer>)maxStack.clone();
+		temp.add(0, top);
+		cache.put(top, temp);
+		return temp;
+	}
+	
 	public static void main(String[] args){
-		int[] w = new int[]{6, 2, 3, 4, 5, 1};
-		int[] d = new int[]{6, 2, 3, 2, 5, 1};
-		int[] h = new int[]{6, 2, 3, 4, 5, 1};
-
-		System.out.println(buildHighestStack(w, d, h));
+		int[] w = new int[]{1, 2, 2, 3, 3, 4};
+		int[] h = new int[]{18, 9, 9, 3, 8, 7};
+		int[] d = new int[]{1, 2, 2, 7, 3, 4};
+		
+		System.out.println(buildHighestStack(w, h, d));
 	}
 }
